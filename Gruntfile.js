@@ -208,7 +208,7 @@ module.exports = function(grunt) {
           var slide = path.join('products.产品', path.dirname(path.dirname(file)), 'slide.hbs');
           grunt.file.write(slide, html);
         }
-        if ($('.nav').length > 0) {
+        if ($('.nav').length > 0 && file.match(/\//g).length > 1) {
           var html = $.html($('.nav').closest('tr'));
           html = html.replace(/\r\n/g, '\n');
           html = html.replace(/\n{2,}/g, '\n');
@@ -217,12 +217,14 @@ module.exports = function(grunt) {
           html = html.replace(/\t/g, '').trim() + '\n';
           var header = path.join('products.产品', path.dirname(file), 'header.hbs');
           grunt.file.write(header, html);
+        }
+        if (file.match(/\//g).length === 1) {
           var index = '---' + '\n' +
             'layout: default.hbs' + '\n' +
             '---' + '\n' +
             '<div class="box_main" id="box_main">' + '\n' +
             '  <table border="0" cellspacing="0" cellpadding="0" width="620">' + '\n' +
-            html +
+            '{{{list_all_headers}}}' + '\n' +
             '    <tr><td>' + '\n' +
             '{{{find_and_include "led-wall-washer/LWW-1.html"}}}' + '\n' +
             '    </td></tr>' + '\n' +
