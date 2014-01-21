@@ -1,0 +1,15 @@
+<tr><td>
+<div>
+<img id="image1" src="/images/led_neon_tube_bd1.jpg">
+<img id="image2" src="/images/led_neon_tube_bd2.jpg" style="display:none">
+<script>
+var cur=1, max=2, min=1;
+setInterval(function(){
+document.getElementById('image'+cur).style.display = 'none';
+document.getElementById('image'+(cur+1>max?min:(cur+1))).style.display = '';
+cur+=1;
+if (cur>max) cur=min;
+}, 3000);
+</script>
+</div>
+</td></tr>
