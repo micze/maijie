@@ -1,0 +1,44 @@
+{
+  "private": true,
+  "url": "",
+  "production_url": "http://www.micze.com",
+  "use_production_url": false,
+  "name": "micze.com",
+  "NAME": "MICZE",
+  "version": "0.0.0",
+  "keywords": [
+    "Event Lighting",
+    "UpLights",
+    "Party Lights",
+    "Battery Wireless DMX LED Event Light",
+    "LED Party Light",
+    "Wireless DMX Wall Washer"
+  ],
+  "default_title": "Event Lighting, Uplights, Party Lights,Battery Wireless DMX LED Event Light, LED Party Light, Wireless DMX Wall Washer",
+  "description": "BATTERY WIRELESS DMX LED WALL WASHER BATTERY LED EVENT LIGHTING The AURORA smart is a battery operated and wireless DMX controlled LED wash light, uplights.",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "assemble": "~0.4.32",
+    "handlebars-helper-prettify": "~0.2.1",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-connect": "~0.5.0",
+    "grunt-open": "~0.2.2",
+    "assemble-less": "~0.5.3",
+    "grunt-md5": "~0.1.11",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-uglify": "~0.2.7",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-copy": "~0.4.1",
+    "assemble-permalink": "~0.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/choigoonho/maijie.git"
+  },
+  "author": "Cai Guanhao (Choi Goon-ho) <caiguanhao@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/choigoonho/maijie/issues"
+  }
+}

@@ -1,0 +1,251 @@
+{{#prettify}}
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="{{#if description}}{{ description }}{{else}}{{ pkg.description }}{{/if}}" />
+<meta name="keywords" content="{{#if keywords}}{{ keywords }}{{else}}{{join pkg.keywords ', '}}{{/if}}" />
+<title>{{#if title}}{{ title }}{{else}}{{ pkg.default_title }}{{/if}}</title>
+<link rel="stylesheet" media="screen" type="text/css" href="{{obj_val compiled_assets '/assets/css/application.css'}}">
+{{#unless production}}<script src="http://localhost:35729/livereload.js"></script>{{/unless}}
+</head>
+
+<body>
+
+<div id="wrap">
+  <div id="head">
+    <div id="logo">
+      <a href="/"><img src="/assets/images/logo.gif" /></a>
+    </div>
+    <div id="headtxt">
+      MICZE 2010 catalog >>>> view online download .zip
+    </div>
+    <div id="langs">
+      <map name="lang_img_map">
+      <area href="/" shape="rect" coords="33, 0, 101, 59">
+      <area href="/lang/zh/" shape="rect" coords="107, 0, 159, 59">
+      </map>
+      <img src="/assets/images/lang.gif" width="200" height="60" usemap="#lang_img_map" />
+    </div>
+    <div class="clear"></div>
+  </div>
+  <div class="menu">
+  <table class="menulist" border="0">
+    <tr>
+      <td><a href="/products/">PRODUCT CENTER</a></td>
+      <td><a href="/photos/">PRODUCT PHOTO</a></td>
+      <td><a href="/oem-service/">OEM SERVICE</a></td>
+      <td><a href="/rNd-center/">R &amp; D CENTER</a></td>
+      <td><a href="/about/">ABOUT US</a></td>
+      <td><a href="/contact/">CONTACT US</a></td>
+      <td><a href="/faq/">F.A.Q.</a></td>
+      <td><a href="/sitemap/">SITE MAP</a></td>
+    </tr>
+  </table>
+  </div>
+  <div id="content">
+    <div class="box_head"></div>
+    <div class="box">
+      {{>side}}
+      {{>body}}
+      <div class="clear"></div>
+    </div>
+    <div class="box_foot"></div>
+  </div>
+  <div class="menu">
+    &nbsp;
+  </div>
+  <div id="info">
+    <div class="box_head"></div>
+    <div class="box infotxt">
+      Tel:86-757-26380222        Fax:86-757-28887590<br />
+      Email: sales@micze.com Copyright 2006-2012 MICZE<br />
+      ADD: 2#, WAICUN NEW ROAD RONGGUI, SHUNDE DISTRICT, FOSHAN CITY, GUANGDONG PROVINCE, CHINA
+    </div>
+    <div class="box_foot"></div>
+  </div>
+  <div id="alllangs">
+    <div class="box_head"></div>
+    <div class="box">
+      <a href="/">English</a>
+      <a href="/lang/zh/">中文(简体)</a>
+      <a href="/lang/zh-tw/">中文(繁體)</a>
+      <a href="/lang/ja/">日本語</a>
+      <a href="/lang/ko/">한글</a>
+      <a href="/lang/ru/">Русский</a>
+      <a href="/lang/es/">Español</a>
+      <a href="/lang/fr/">Français</a>
+      <a href="/lang/it/">Italiano</a>
+      <a href="/lang/de/">Deutsch</a>
+      <a href="/lang/ar/">العربية</a>
+      <a href="/lang/pt/">Português</a>
+      <a href="/lang/nl/">Nederlandse</a>
+      <a href="/lang/ga/">Gaeilge</a>
+      <a href="/lang/et/">Eesti</a>
+      <a href="/lang/be/">Беларуская</a>
+      <a href="/lang/bg/">Български</a>
+      <a href="/lang/is/">Íslenska</a>
+      <a href="/lang/pl/">Polska</a>
+      <a href="/lang/fa/">فارسی</a>
+      <a href="/lang/af/">Afrikaans</a>
+      <a href="/lang/da/">Dansk</a>
+      <a href="/lang/tl/">Tagalog</a>
+      <a href="/lang/fi/">Suomen</a>
+      <a href="/lang/ht/">Alfa kreyòl ayisyen</a>
+      <a href="/lang/gl/">Galego</a>
+      <a href="/lang/ca/">Català</a>
+      <a href="/lang/cs/">Čeština</a>
+      <a href="/lang/hr/">Hrvatska</a>
+      <a href="/lang/lv/">Latviešu</a>
+      <a href="/lang/lt/">Lietuviškai</a>
+      <a href="/lang/ro/">Român</a>
+      <a href="/lang/mt/">Malti</a>
+      <a href="/lang/ms/">Bahasa Melayu</a>
+      <a href="/lang/mk/">Македонски</a>
+      <a href="/lang/no/">Norsk</a>
+      <a href="/lang/sv/">Svenska</a>
+      <a href="/lang/sr/">Српски</a>
+      <a href="/lang/sk/">Slovenčina</a>
+      <a href="/lang/sl/">Slovenski</a>
+      <a href="/lang/sw/">Kiswahili</a>
+      <a href="/lang/th/">ไทย</a>
+      <a href="/lang/tr/">Türkçe</a>
+      <a href="/lang/cy/">Cymraeg</a>
+      <a href="/lang/uk/">Українська</a>
+      <a href="/lang/iw/">עברית</a>
+      <a href="/lang/el/">Ελληνικά</a>
+      <a href="/lang/hu/">Magyar</a>
+      <a href="/lang/yi/">ייִדיש</a>
+      <a href="/lang/hi/">हिन्दी</a>
+      <a href="/lang/id/">Indonesia</a>
+      <a href="/lang/vi/">Việt</a>
+      <a href="/lang/sq/">Shqipe</a>
+    </div>
+  </div>
+<script>
+var alllanglinks=document.getElementById('alllangs').getElementsByTagName('a');
+for(var i=0; i<alllanglinks.length; i++) {
+alllanglinks[i].setAttribute('href', alllanglinks[i].getAttribute('href')+window.location.pathname.replace(/^\/lang\/(.+?)\//, '/').substring(1));
+}
+function _same_height(){if(document.getElementById('box_side').offsetHeight < document.getElementById('box_main').offsetHeight) { document.getElementById('box_side').style.height = document.getElementById('box_main').offsetHeight-2+'px'; }}
+_same_height();
+window.onload=_same_height;
+</script>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-2235061-4");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-2235061-7");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-2235061-8");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-2235061-9");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-2235061-10");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-2235061-11");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-2235061-12");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-2235061-13");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-2235061-14");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-2235061-15");
+pageTracker._trackPageview();
+} catch(err) {}</script><script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F8908804cfff3bceeae8ae46c516f1077' type='text/javascript'%3E%3C/script%3E"));
+</script>
+</div>
+
+</body>
+
+</html>
+{{/prettify}}
