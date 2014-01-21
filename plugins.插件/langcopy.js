@@ -8,11 +8,13 @@ module.exports = function(params, callback) {
 
   var langs    = Object.keys(options.pkg.languages);
 
-  for (var i = 0; i < pages.length; i++) {
-    var page = pages[i];
-    var dest = page.dest.replace(/^site/, '');
-    for (var j = 0; j < langs.length; j++) {
-      grunt.file.copy(page.dest, 'site/lang/' + langs[j] + dest);
+  if (options.pkg.generate_for_multi_languages) {
+    for (var i = 0; i < pages.length; i++) {
+      var page = pages[i];
+      var dest = page.dest.replace(/^site/, '');
+      for (var j = 0; j < langs.length; j++) {
+        grunt.file.copy(page.dest, 'site/lang/' + langs[j] + dest);
+      }
     }
   }
 

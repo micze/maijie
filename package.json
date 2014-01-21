@@ -14,6 +14,7 @@
     "LED Party Light",
     "Wireless DMX Wall Washer"
   ],
+  "generate_for_multi_languages": false,
   "languages": {
     "zh": "中文(简体)",
     "zh-tw": "中文(繁體)",
@@ -84,7 +85,8 @@
     "grunt-contrib-uglify": "~0.2.7",
     "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-copy": "~0.4.1",
-    "assemble-permalink": "~0.1.1"
+    "assemble-permalink": "~0.1.1",
+    "cheerio": "~0.13.1"
   },
   "repository": {
     "type": "git",

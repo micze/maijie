@@ -217,6 +217,19 @@ module.exports = function(grunt) {
           html = html.replace(/\t/g, '').trim() + '\n';
           var header = path.join('products.产品', path.dirname(file), 'header.hbs');
           grunt.file.write(header, html);
+          var index = '---' + '\n' +
+            'layout: default.hbs' + '\n' +
+            '---' + '\n' +
+            '<div class="box_main" id="box_main">' + '\n' +
+            '  <table border="0" cellspacing="0" cellpadding="0" width="620">' + '\n' +
+            html +
+            '    <tr><td>' + '\n' +
+            '{{{find_and_include "led-wall-washer/LWW-1.html"}}}' + '\n' +
+            '    </td></tr>' + '\n' +
+            '  </table>' + '\n' +
+            '</div>' + '\n';
+          var indexfile = path.join('products.产品', path.dirname(file), 'index.html');
+          grunt.file.write(indexfile, index);
         }
       }
     });
