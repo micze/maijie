@@ -1,5 +1,4 @@
 var path = require('path');
-var fs = require('fs');
 var grunt = require('grunt');
 
 module.exports.register = function(Handlebars, options) {
@@ -11,12 +10,12 @@ module.exports.register = function(Handlebars, options) {
     var dir, file = '', filepath;
     dir = path.dirname(this.page.src);
     filepath = path.join(dir, filename);
-    if (fs.existsSync(filepath)) {
-      file = fs.readFileSync(filepath);
+    if (grunt.file.exists(filepath)) {
+      file = grunt.file.read(filepath);
     } else {
       filepath = path.join(path.dirname(dir), filename);
-      if (fs.existsSync(filepath)) {
-        file = fs.readFileSync(filepath);
+      if (grunt.file.exists(filepath)) {
+        file = grunt.file.read(filepath);
       }
     }
     return file;

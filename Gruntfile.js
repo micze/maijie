@@ -199,7 +199,7 @@ module.exports = function(grunt) {
         html = html.trim() + '\n';
         grunt.file.write('products.产品/' + file, html);
       } else {
-        if ($('#image1').length > 0) {
+        if ($('#image1').length > 0 && file.match(/\//g).length > 1) {
           var html = $.html($('#image1').closest('tr'));
           html = html.replace(/\r\n/g, '\n');
           html = html.replace(/\/UploadFiles\//g, '/images/');
@@ -224,6 +224,7 @@ module.exports = function(grunt) {
             '---' + '\n' +
             '<div class="box_main" id="box_main">' + '\n' +
             '  <table border="0" cellspacing="0" cellpadding="0" width="620">' + '\n' +
+            '{{{find_and_include "slide.hbs"}}}' + '\n' +
             '{{{list_all_headers}}}' + '\n' +
             '    <tr><td>' + '\n' +
             '{{{find_and_include "led-wall-washer/LWW-1.html"}}}' + '\n' +
