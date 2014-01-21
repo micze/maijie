@@ -178,4 +178,47 @@ module.exports = function(grunt) {
   grunt.registerTask('common', [ 'clean', 'less', 'uglify', 'concat', 'clean:tmp', 'copy' ]);
   grunt.registerTask('default', [ 'common', 'assemble', 'connect', 'open', 'watch' ]);
   grunt.registerTask('make', [ 'common', 'md5', 'assemble_in_production', 'assemble' ]);
+
+  grunt.registerTask('convert', '', function(dir) {
+    if (!dir) return grunt.fail.fatal('Please provide a dir.');
+    var cheerio = require('cheerio');
+    var path = require('path');
+    var files = grunt.file.expand({
+      cwd: dir
+    }, ['**/*.html']).filter(function(file) {
+      return file.indexOf('/') > -1 && file.indexOf('list_') === -1;
+    });
+    files.forEach(function(file) {
+      var $ = cheerio.load(grunt.file.read(dir + '/' + file));
+      if (file.indexOf('index.html') === -1) {
+        var html = $.html('table[height]');
+        html = html.replace(/\r\n/g, '\n');
+        html = html.replace(/\/UploadFiles\//g, '/images/');
+        html = html.replace(/^\t{4}/mg, '');
+        html = html.replace(/^\t{1,}/mg, '  ');
+        html = html.trim() + '\n';
+        grunt.file.write('products.产品/' + file, html);
+      } else {
+        if ($('#image1').length > 0) {
+          var html = $.html($('#image1').closest('tr'));
+          html = html.replace(/\r\n/g, '\n');
+          html = html.replace(/\/UploadFiles\//g, '/images/');
+          html = html.replace(/"> </g, '">\n<');
+          html = html.replace(/\t/g, '').trim() + '\n';
+          var slide = path.join('products.产品', path.dirname(path.dirname(file)), 'slide.hbs');
+          grunt.file.write(slide, html);
+        }
+        if ($('.nav').length > 0) {
+          var html = $.html($('.nav').closest('tr'));
+          html = html.replace(/\r\n/g, '\n');
+          html = html.replace(/\n{2,}/g, '\n');
+          html = html.replace(/\s?<a/g, '\n<a');
+          html = html.replace(/a>\s?\|/g, 'a>\n|');
+          html = html.replace(/\t/g, '').trim() + '\n';
+          var header = path.join('products.产品', path.dirname(file), 'header.hbs');
+          grunt.file.write(header, html);
+        }
+      }
+    });
+  })
 };
