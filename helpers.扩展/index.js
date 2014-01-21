@@ -21,6 +21,22 @@ module.exports.register = function(Handlebars, options) {
     return file;
   });
 
+  Handlebars.registerHelper('include_this_or_the_first_html_file', function(filename) {
+    var dir, file = '';
+    dir = path.dirname(this.page.src);
+    if (filename && grunt.file.exists(path.join(dir, filename))) {
+      file = grunt.file.read(path.join(dir, filename));
+    } else {
+      var files = grunt.file.expand({
+        cwd: dir
+      }, ['*.html']);
+      if (files.length > 0) {
+        file = grunt.file.read(path.join(dir, files[0]));
+      }
+    }
+    return file;
+  });
+
   Handlebars.registerHelper('list_all_headers', function() {
     var dir = path.dirname(this.page.src);
     var headers = grunt.file.expand({

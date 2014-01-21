@@ -218,6 +218,13 @@ module.exports = function(grunt) {
           var header = path.join('products.产品', path.dirname(file), 'header.hbs');
           grunt.file.write(header, html);
         }
+        var htmlfiles = grunt.file.expand({
+          cwd: path.join(dir, path.dirname(file))
+        }, ['**/*.html']).filter(function(filename) {
+          return (filename.indexOf('index.html') === -1 && filename.indexOf('list_') === -1);
+        });
+        if (htmlfiles.length === 0) grunt.fail.fatal('no html files found!!');
+        var first_file = htmlfiles[0];
         if (file.match(/\//g).length === 1) {
           var index = '---' + '\n' +
             'layout: default.hbs' + '\n' +
@@ -227,10 +234,17 @@ module.exports = function(grunt) {
             '{{{find_and_include "slide.hbs"}}}' + '\n' +
             '{{{list_all_headers}}}' + '\n' +
             '    <tr><td>' + '\n' +
-            '{{{find_and_include "led-wall-washer/LWW-1.html"}}}' + '\n' +
+            '{{{find_and_include "' + first_file + '"}}}' + '\n' +
             '    </td></tr>' + '\n' +
             '  </table>' + '\n' +
             '</div>' + '\n';
+          var indexfile = path.join('products.产品', path.dirname(file), 'index.html');
+          grunt.file.write(indexfile, index);
+        } else {
+          var index = '---' + '\n' +
+            'layout: product.hbs' + '\n' +
+            '---' + '\n' +
+            '{{{include_this_or_the_first_html_file "' + first_file + '"}}}' + '\n';
           var indexfile = path.join('products.产品', path.dirname(file), 'index.html');
           grunt.file.write(indexfile, index);
         }
