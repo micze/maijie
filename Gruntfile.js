@@ -205,7 +205,9 @@ module.exports = function(grunt) {
           html = html.replace(/\/UploadFiles\//g, '/images/');
           html = html.replace(/"> </g, '">\n<');
           html = html.replace(/\t/g, '').trim() + '\n';
-          var slide = path.join('products.产品', path.dirname(path.dirname(file)), 'slide.hbs');
+          var slide = path.join('products.产品', path.dirname(file), 'slide.hbs');
+          grunt.file.write(slide, html);
+          slide = path.join('products.产品', path.dirname(path.dirname(file)), 'slide.hbs');
           grunt.file.write(slide, html);
         }
         if ($('.nav').length > 0 && file.match(/\//g).length > 1) {
