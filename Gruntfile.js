@@ -101,12 +101,22 @@ module.exports = function(grunt) {
     assemble: {
       options: {
         pkg: '<%= pkg %>',
-        plugins: [ 'assemble-permalink' ],
+        plugins: [ 'assemble-permalink', 'plugins.插件/langcopy.js' ],
         helpers: [ 'handlebars-helper-prettify', 'helpers.扩展/*.js' ],
         partials: [ 'partials.模块/*.hbs' ],
         layoutdir: 'layouts.模板',
         layout: 'default.hbs',
         production: false
+      },
+      products: {
+        options: {
+          layout: 'product.hbs'
+        },
+        expand: true,
+        cwd: 'products.产品/',
+        src: [ '**/*.html' ],
+        dest: 'site/products/',
+        dest_for_permalink: 'site/'
       },
       static: {
         files: {
@@ -137,6 +147,10 @@ module.exports = function(grunt) {
       reassemble: {
         files: [ 'helpers.扩展/*', 'layouts.模板/*', 'partials.模块/*', 'pages.页面/*' ],
         tasks: [ 'assemble' ]
+      },
+      products: {
+        files: [ 'products.产品/**/*.html', 'products.产品/**/*.hbs' ],
+        tasks: [ 'assemble:products' ]
       }
     }
   });
