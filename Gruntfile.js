@@ -193,6 +193,7 @@ module.exports = function(grunt) {
       if (file.indexOf('index.html') === -1) {
         var html = $.html('table[height]');
         html = html.replace(/\r\n/g, '\n');
+        html = html.replace(/http:\/\/www\.micze\.com\/UploadFiles\//g, '/images/');
         html = html.replace(/\/UploadFiles\//g, '/images/');
         html = html.replace(/^\t{4}/mg, '');
         html = html.replace(/^\t{1,}/mg, '  ');
@@ -202,6 +203,7 @@ module.exports = function(grunt) {
         if ($('#image1').length > 0 && file.match(/\//g).length > 1) {
           var html = $.html($('#image1').closest('tr'));
           html = html.replace(/\r\n/g, '\n');
+          html = html.replace(/http:\/\/www\.micze\.com\/UploadFiles\//g, '/images/');
           html = html.replace(/\/UploadFiles\//g, '/images/');
           html = html.replace(/"> </g, '">\n<');
           html = html.replace(/\t/g, '').trim() + '\n';

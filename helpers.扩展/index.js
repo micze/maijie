@@ -6,6 +6,16 @@ module.exports.register = function(Handlebars, options) {
     return object ? object[property] : property;
   });
 
+  Handlebars.registerHelper('include', function(filename) {
+    var dir, file = '', filepath;
+    dir = path.dirname(this.page.src);
+    filepath = path.join(dir, filename);
+    if (grunt.file.exists(filepath)) {
+      file = grunt.file.read(filepath);
+    }
+    return file;
+  });
+
   Handlebars.registerHelper('find_and_include', function(filename) {
     var dir, file = '', filepath;
     dir = path.dirname(this.page.src);
