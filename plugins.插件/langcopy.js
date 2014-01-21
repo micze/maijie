@@ -6,17 +6,17 @@ module.exports = function(params, callback) {
   var options  = assemble.options;
   var pages    = options.pages;
 
-  var langs    = Object.keys(options.pkg.languages);
+  // var langs    = Object.keys(options.pkg.languages);
 
-  if (options.pkg.generate_for_multi_languages) {
-    for (var i = 0; i < pages.length; i++) {
-      var page = pages[i];
-      var dest = page.dest.replace(/^site/, '');
-      for (var j = 0; j < langs.length; j++) {
-        grunt.file.copy(page.dest, 'site/lang/' + langs[j] + dest);
-      }
-    }
-  }
+  // if (options.pkg.generate_for_multi_languages) {
+  //   for (var i = 0; i < pages.length; i++) {
+  //     var page = pages[i];
+  //     var dest = page.dest.replace(/^site/, '');
+  //     for (var j = 0; j < langs.length; j++) {
+  //       grunt.file.copy(page.dest, 'site/lang/' + langs[j] + dest);
+  //     }
+  //   }
+  // }
 
   callback();
 };
