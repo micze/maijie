@@ -270,15 +270,18 @@ module.exports = function(grunt) {
       return file.indexOf('/') > -1 && file.indexOf('list_') === -1;
     });
     var yaml = require('js-yaml');
+    function get_title_keywords_and_description($, before) {
+      var title = $('title').text().replace(/[\r\n]+?/g, ' ').trim();
+      var desc = $('meta[name="description"]').attr('content').replace(/[\r\n]+?/g, ' ').trim();
+      var keywords = $('meta[name="keywords"]').attr('content').replace(/[\r\n]+?/g, ' ').trim().split(/\s*,\s*/);
+      title = yaml.dump({ title: title });
+      desc = yaml.dump({ description: desc });
+      keywords = yaml.dump({ keywords: keywords });
+      return '---\n' + (before || '') + title + '\n' + desc + '\n' + keywords + '\n' + '---\n';
+    }
     files.forEach(function(file) {
       var $ = cheerio.load(grunt.file.read(dir + '/' + file));
       if (file.indexOf('index.html') === -1) {
-        var title = $('title').text().replace(/[\r\n]+?/g, ' ').trim();
-        var desc = $('meta[name="description"]').attr('content').replace(/[\r\n]+?/g, ' ').trim();
-        var keywords = $('meta[name="keywords"]').attr('content').replace(/[\r\n]+?/g, ' ').trim().split(/\s*,\s*/);
-        title = yaml.dump({ title: title });
-        desc = yaml.dump({ description: desc });
-        keywords = yaml.dump({ keywords: keywords });
         var html = $.html('table[height]');
         html = html.replace(/\r\n/g, '\n');
         html = html.replace(/http:\/\/www\.micze\.com\/UploadFiles\//g, '/images/');
@@ -286,7 +289,7 @@ module.exports = function(grunt) {
         html = html.replace(/^\t{4}/mg, '');
         html = html.replace(/^\t{1,}/mg, '  ');
         html = html.trim() + '\n';
-        html = '---\n' + title + '\n' + desc + '\n' + keywords + '\n' + '---\n' + html;
+        html = get_title_keywords_and_description($) + html;
         grunt.file.write('products.产品/' + file, html);
       } else {
         if ($('#image1').length > 0 && file.match(/\//g).length > 1) {
@@ -319,9 +322,8 @@ module.exports = function(grunt) {
         if (htmlfiles.length === 0) grunt.fail.fatal('no html files found!!');
         var first_file = htmlfiles[0];
         if (file.match(/\//g).length === 1) {
-          var index = '---' + '\n' +
-            'layout: default.hbs' + '\n' +
-            '---' + '\n' +
+          var index = 
+            get_title_keywords_and_description($, 'layout: default.hbs\n\n') +
             '<div class="box_main" id="box_main">' + '\n' +
             '  <table border="0" cellspacing="0" cellpadding="0" width="620">' + '\n' +
             '{{{find_and_include "slide.hbs"}}}' + '\n' +
@@ -334,9 +336,8 @@ module.exports = function(grunt) {
           var indexfile = path.join('products.产品', path.dirname(file), 'index.html');
           grunt.file.write(indexfile, index);
         } else {
-          var index = '---' + '\n' +
-            'layout: product.hbs' + '\n' +
-            '---' + '\n' +
+          var index = 
+            get_title_keywords_and_description($, 'layout: product.hbs\n\n') +
             '{{{include_this_or_the_first_html_file "' + first_file + '"}}}' + '\n';
           var indexfile = path.join('products.产品', path.dirname(file), 'index.html');
           grunt.file.write(indexfile, index);
