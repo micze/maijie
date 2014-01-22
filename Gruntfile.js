@@ -237,7 +237,7 @@ module.exports = function(grunt) {
       text = text.replace(/[\t\r]*/g, '')
       text = text.replace('LED EVENT LIGHT', ''); // exceptions
       text = text.replace(/\n{1,}/g, '\n').trim();
-      return text.split('\n');
+      return text.split(/\s*\n\s*/);
     }
     var en = read('index.html');
     var obj = {};
