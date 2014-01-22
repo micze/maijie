@@ -6,6 +6,14 @@ module.exports.register = function(Handlebars, options) {
     return object ? object[property] : property;
   });
 
+  Handlebars.registerHelper('make_keywords', function(keywords) {
+    return typeof(keywords) === 'string' ? keywords : keywords.join(', ');
+  });
+
+  function strip_yfm(content) {
+    return content.replace(/^---(.|\n)*---\n/, '');
+  }
+
   Handlebars.registerHelper('include', function(filename) {
     var dir, file = '', filepath;
     dir = path.dirname(this.page.src);
@@ -13,6 +21,7 @@ module.exports.register = function(Handlebars, options) {
     if (grunt.file.exists(filepath)) {
       file = grunt.file.read(filepath);
     }
+    file = strip_yfm(file);
     return file;
   });
 
@@ -28,6 +37,7 @@ module.exports.register = function(Handlebars, options) {
         file = grunt.file.read(filepath);
       }
     }
+    file = strip_yfm(file);
     return file;
   });
 
@@ -44,6 +54,7 @@ module.exports.register = function(Handlebars, options) {
         file = grunt.file.read(path.join(dir, files[0]));
       }
     }
+    file = strip_yfm(file);
     return file;
   });
 

@@ -269,9 +269,16 @@ module.exports = function(grunt) {
     }, ['**/*.html']).filter(function(file) {
       return file.indexOf('/') > -1 && file.indexOf('list_') === -1;
     });
+    var yaml = require('js-yaml');
     files.forEach(function(file) {
       var $ = cheerio.load(grunt.file.read(dir + '/' + file));
       if (file.indexOf('index.html') === -1) {
+        var title = $('title').text().replace(/[\r\n]+?/g, ' ').trim();
+        var desc = $('meta[name="description"]').attr('content').replace(/[\r\n]+?/g, ' ').trim();
+        var keywords = $('meta[name="keywords"]').attr('content').replace(/[\r\n]+?/g, ' ').trim().split(/\s*,\s*/);
+        title = yaml.dump({ title: title });
+        desc = yaml.dump({ description: desc });
+        keywords = yaml.dump({ keywords: keywords });
         var html = $.html('table[height]');
         html = html.replace(/\r\n/g, '\n');
         html = html.replace(/http:\/\/www\.micze\.com\/UploadFiles\//g, '/images/');
@@ -279,6 +286,7 @@ module.exports = function(grunt) {
         html = html.replace(/^\t{4}/mg, '');
         html = html.replace(/^\t{1,}/mg, '  ');
         html = html.trim() + '\n';
+        html = '---\n' + title + '\n' + desc + '\n' + keywords + '\n' + '---\n' + html;
         grunt.file.write('products.产品/' + file, html);
       } else {
         if ($('#image1').length > 0 && file.match(/\//g).length > 1) {
