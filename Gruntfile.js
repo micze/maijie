@@ -19,7 +19,7 @@ module.exports = function(grunt) {
       js: [ 'site/assets/js/*.js' ],
       images: [ 'site/assets/images/**' ],
       lang: [ 'site/lang' ],
-      site: [ 'site' ],
+      site: [ 'site/*', '!site/lang' ],
       tmp: [ 'tmp/*' ]
     },
     copy: {
@@ -176,7 +176,7 @@ module.exports = function(grunt) {
     }
     grunt.log.ok('Entered production mode.');
   });
-  grunt.registerTask('common', [ 'clean', 'less', 'uglify', 'concat', 'clean:tmp', 'copy' ]);
+  grunt.registerTask('common', [ 'clean:site', 'less', 'uglify', 'concat', 'clean:tmp', 'copy' ]);
   grunt.registerTask('default', [ 'common', 'assemble', 'connect', 'open', 'watch' ]);
   grunt.registerTask('make', [ 'common', 'md5', 'assemble_in_production', 'assemble' ]);
 
