@@ -1,7 +1,8 @@
 <?php
-define("USER", "");
-define("PASSWORD", "");
-define("MAILTO", "");
+require_once('users.php');
+// define("USER", "");
+// define("PASSWORD", "");
+// define("MAILTO", "");
 
 function output_alert($words) {
   die('<script>alert("'.$words.'");window.history.back(-1);</script>');
@@ -20,22 +21,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         output_alert('Invalid Company. Length should be between 1-100.');
       }
       $company = isset($_POST['company'])?$_POST['company']:'';
-
+      
       if (isset($_POST['website']) && strlen($_POST['website'])>100) {
         output_alert('Invalid Website. Length should be between 1-100.');
       }
       $website = isset($_POST['website'])?$_POST['website']:'';
-
+      
       if (isset($_POST['country']) && strlen($_POST['country'])>100) {
         output_alert('Invalid Country. Length should be between 1-100.');
       }
       $country = isset($_POST['country'])?$_POST['country']:'';
-
+      
       if (isset($_POST['telephone']) && strlen($_POST['telephone'])>30) {
         output_alert('Invalid Telephone. Length should be between 1-30.');
       }
       $telephone = isset($_POST['telephone'])?$_POST['telephone']:'';
-
+      
       if (isset($_POST['fax']) && strlen($_POST['fax'])>30) {
         output_alert('Invalid Fax. Length should be between 1-30.');
       }
@@ -92,6 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $mail->SMTPAuth = true;
   $mail->Username = USER;
   $mail->Password = PASSWORD;
+  $mail->CharSet = "utf-8";
 
   $mail->From = USER . '@163.com';
   $mail->FromName = USER . '@163.com';
