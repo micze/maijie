@@ -7,7 +7,7 @@
 <meta name="description" content="{{#if description}}{{ description }}{{else}}{{ pkg.description }}{{/if}}" />
 <meta name="keywords" content="{{#if keywords}}{{make_keywords keywords}}{{else}}{{join pkg.keywords ', '}}{{/if}}" />
 <title>{{#if title}}{{ title }}{{else}}{{ pkg.default_title }}{{/if}}</title>
-<link rel="stylesheet" media="screen" type="text/css" href="{{obj_val compiled_assets '/assets/css/application.css'}}">
+<link rel="stylesheet" media="screen" type="text/css" href="/assets/css/index.css">
 {{#unless production}}<script src="http://localhost:35729/livereload.js"></script>{{/unless}}
 </head>
 
@@ -124,7 +124,7 @@
     </div>
   </div>
 </div>
-<script type="text/javascript" src="{{obj_val compiled_assets '/assets/js/application.js'}}"></script>
+<script type="text/javascript" src="/assets/js/index.js"></script>
 <script src="/google-analytics.js"></script>
 </body>
 

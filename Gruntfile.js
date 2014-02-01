@@ -19,17 +19,16 @@ module.exports = function(grunt) {
       js: [ 'site/assets/js/*.js' ],
       images: [ 'site/assets/images/**' ],
       lang: [ 'site/lang' ],
-      site: [ 'site/*', '!site/lang' ],
-      tmp: [ 'tmp/*' ]
+      site: [ 'site/*', '!site/lang' ]
     },
     copy: {
-      images: {
+      assets: {
         expand: true,
-        cwd: 'assets.资源/images/',
+        cwd: 'assets.资源/',
         src: '**',
-        dest: 'site/assets/images/'
+        dest: 'site/assets/'
       },
-      images2: {
+      images: {
         expand: true,
         cwd: 'images.图片/',
         src: '**',
@@ -41,62 +40,6 @@ module.exports = function(grunt) {
         src: '**',
         dest: 'site/',
         dot: true
-      }
-    },
-    less: {
-      options: {
-        compress: true,
-        stripBanners: true,
-        banner: '/*! Generated on <%= grunt.template.today("dddd, mmmm dS, yyyy, h:MM:ss TT") %> */\n'
-      },
-      styles: {
-        files: {
-          'site/assets/css/application.css': [ 'assets.资源/css/index.less' ]
-        }
-      }
-    },
-    uglify: {
-      javascripts: {
-        files: [{
-          expand: true,
-          cwd: 'assets.资源/js/',
-          src: [ '**/*.js', '!**/*.min.js' ],
-          dest: 'tmp/js/'
-        }]
-      }
-    },
-    concat: {
-      options: {
-        banner: '/*! Generated on <%= grunt.template.today("dddd, mmmm dS, yyyy, h:MM:ss TT") %> */\n'
-      },
-      js: {
-        files: {
-          'site/assets/js/application.js': [ 'assets.资源/js/**/jquery-*.min.js', 'assets.资源/js/**/*.min.js', 'tmp/js/**/*.js' ]
-        }
-      }
-    },
-    md5: {
-      options: {
-        afterEach: function(fileChanged) {
-          grunt.file.delete(fileChanged.oldPath);
-        },
-        after: function(filesChanged) {
-          var compiled_assets = grunt.config('assemble.options.compiled_assets') || {};
-          for (var i = 0; i < filesChanged.length; i++) {
-            compiled_assets[filesChanged[i].oldPath.replace(/^site/, '')] = filesChanged[i].newPath.replace(/^site/, '');
-          }
-          grunt.config('assemble.options.compiled_assets', compiled_assets);
-        }
-      },
-      css: {
-        files: {
-          'site/assets/css/': [ 'site/assets/css/*.css' ]
-        }
-      },
-      js: {
-        files: {
-          'site/assets/js/': [ 'site/assets/js/*.js' ]
-        }
       }
     },
     assemble: {
@@ -157,15 +100,11 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('assemble');
-  grunt.loadNpmTasks('assemble-less');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-open');
-  grunt.loadNpmTasks('grunt-md5');
 
   grunt.registerTask('assemble_in_production', '', function() {
     grunt.config('assemble.options.production', true);
@@ -176,9 +115,9 @@ module.exports = function(grunt) {
     }
     grunt.log.ok('Entered production mode.');
   });
-  grunt.registerTask('common', [ 'clean:site', 'less', 'uglify', 'concat', 'clean:tmp', 'copy' ]);
+  grunt.registerTask('common', [ 'clean:site', 'copy' ]);
   grunt.registerTask('default', [ 'common', 'assemble', 'connect', 'open', 'watch' ]);
-  grunt.registerTask('make', [ 'common', 'md5', 'assemble_in_production', 'assemble' ]);
+  grunt.registerTask('make', [ 'common', 'assemble_in_production', 'assemble', 'translate' ]);
 
   grunt.registerTask('translate', [ 'clean:lang', '_translate' ]);
   grunt.registerTask('_translate', 'translate pages', function() {
