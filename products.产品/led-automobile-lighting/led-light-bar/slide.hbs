@@ -1,0 +1,19 @@
+<tr><td>
+<div>
+<img id="image1" src="/images/led-light-bar-bd1.jpg">
+<img id="image2" src="/images/led-light-bar-bd2.jpg" style="display: none">
+<img id="image3" src="/images/led-light-bar-bd3.jpg" style="display: none">
+<img id="image4" src="/images/led-light-bar-bd4.jpg" style="display: none">
+<img id="image5" src="/images/led-light-bar-bd5.jpg" style="display: none">
+<img id="image6" src="/images/led-light-bar-bd6.jpg" style="display: none">
+<script>
+var cur=1, max=6, min=1;
+setInterval(function(){
+document.getElementById('image'+cur).style.display = 'none';
+document.getElementById('image'+(cur+1>max?min:(cur+1))).style.display = '';
+cur+=1;
+if (cur>max) cur=min;
+}, 3000);
+</script>
+</div>
+</td></tr>
